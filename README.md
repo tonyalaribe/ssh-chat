@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/shazow/ssh-chat.svg?branch=master)](https://travis-ci.org/shazow/ssh-chat)
+[![Bountysource](https://www.bountysource.com/badge/team?team_id=52292&style=bounties_received)](https://www.bountysource.com/teams/ssh-chat/issues?utm_source=ssh-chat&utm_medium=shield&utm_campaign=bounties_received)
+[![GoDoc](https://godoc.org/github.com/shazow/ssh-chat?status.svg)](https://godoc.org/github.com/shazow/ssh-chat)
 
 # ssh-chat
 
@@ -37,7 +39,7 @@ Usage:
 Application Options:
   -v, --verbose    Show verbose logging.
   -i, --identity=  Private key to identify server with. (~/.ssh/id_rsa)
-      --bind=      Host and port to listen on. (0.0.0.0:22)
+      --bind=      Host and port to listen on. (0.0.0.0:2022)
       --admin=     Fingerprint of pubkey to mark as admin.
       --whitelist= Optional file of pubkey fingerprints that are allowed to connect
       --motd=      Message of the Day file (optional)
@@ -47,11 +49,11 @@ Help Options:
   -h, --help       Show this help message
 ```
 
-After doing `go get github.com/shazow/ssh-chat` on this repo, you should be able
+After doing `go get github.com/shazow/ssh-chat/...` on this repo, you should be able
 to run a command like:
 
 ```
-$ ssh-chat --verbose --bind ":2022" --identity ~/.ssh/id_dsa
+$ ssh-chat --verbose --bind ":22" --identity ~/.ssh/id_dsa
 ```
 
 To bind on port 22, you'll need to make sure it's free (move any other ssh
@@ -60,6 +62,8 @@ daemons to another port) and run ssh-chat as root (or with sudo).
 ## Deploying with Docker
 
 You can run ssh-chat using a Docker image without manually installing go-lang:
+
+**Note: alvin/ssh-chat has v0 which is not the latest master branch as of this writing (Jan 23, 2015)**
 
 ```
 $ docker pull alvin/ssh-chat

@@ -2,16 +2,15 @@ BINARY = ssh-chat
 KEY = host_key
 PORT = 2022
 
+SRCS = %.go
+
 all: $(BINARY)
 
-**/*.go:
-	go build ./...
-
-$(BINARY): **/*.go *.go
-	go build -ldflags "-X main.buildCommit `git rev-parse --short HEAD`" .
+$(BINARY): deps **/**/*.go **/*.go *.go
+	go build -ldflags "-X main.buildCommit `git describe --long --tags --dirty --always`" ./cmd/ssh-chat
 
 deps:
-	go get .
+	go get ./...
 
 build: $(BINARY)
 
@@ -28,5 +27,5 @@ debug: $(BINARY) $(KEY)
 	./$(BINARY) --pprof 6060 -i $(KEY) --bind ":$(PORT)" -vv
 
 test:
-	go test .
-	golint
+	go test ./...
+	golint ./...
